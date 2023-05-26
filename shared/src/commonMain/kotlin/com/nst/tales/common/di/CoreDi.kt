@@ -33,7 +33,7 @@ internal val coreDi = DI.Module(name = "Core") {
         UserMapper()
     }
     bind<UserRepository>() with singleton {
-        UserRepository(instance())
+        UserRepository(instance(), instance())
     }
     bind<BookRepository>() with singleton {
         BookRepository(instance())

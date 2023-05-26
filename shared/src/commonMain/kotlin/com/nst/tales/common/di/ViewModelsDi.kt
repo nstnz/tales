@@ -47,7 +47,7 @@ internal val viewModelsDi = DI.Module(name = "ViewModels") {
     }
     bind<SurveyScreenViewModel>() with scoped(surveyScope).multiton {
         SurveyScreenViewModel(
-            instance(),
+            instance(), instance(), instance(),
         )
     }
 }

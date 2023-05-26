@@ -36,7 +36,7 @@ internal class MainScreenViewModel(
 
         is MainScreenIntent.Update -> null
         MainScreenIntent.CreateBook -> {
-            router.navigateToCreating()
+            router.navigateToSurvey()
             null
         }
     }

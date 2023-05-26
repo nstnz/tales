@@ -29,6 +29,6 @@ private fun MainScreenPreview() {
 @Composable
 private fun SurveyScreenPreview() {
     AppTheme {
-        SurveyScreen(SurveyScreenState)
+        SurveyScreen(SurveyScreenState(null))
     }
 }
