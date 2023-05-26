@@ -74,7 +74,7 @@ internal fun SurveyScreen(
                     TextInputComponent(
                         Modifier.fillMaxWidth(),
                         enabled = false,
-                        value = TextFieldValue("dfsdfsdf"),
+                        value = TextFieldValue(state.userModel?.name.orEmpty()),
                         placeholder = "Name",
                         label = "sdfdsfsdf",
                         onValueChange = {}
@@ -83,8 +83,8 @@ internal fun SurveyScreen(
                     TextInputComponent(
                         Modifier.fillMaxWidth(),
                         enabled = false,
-                        value = TextFieldValue("dfsdfsdf"),
-                        placeholder = "Name",
+                        value = TextFieldValue(state.userModel?.age?.toString().orEmpty()),
+                        placeholder = "Age",
                         label = "sdfdsfsdf",
                         onValueChange = {}
                     )
@@ -97,9 +97,9 @@ internal fun SurveyScreen(
                     )
                     SpacerComponent { x1 }
                     Row {
-                        GenderIcon(isGirl = true, selected = false)
+                        GenderIcon(isGirl = true, selected = state.userModel?.isGirl == true)
                         SpacerComponent { x6 }
-                        GenderIcon(isGirl = false, selected = false)
+                        GenderIcon(isGirl = false, selected = state.userModel?.isGirl == false)
                     }
                     SpacerComponent { x1 }
                     SpacerComponent { x3 }

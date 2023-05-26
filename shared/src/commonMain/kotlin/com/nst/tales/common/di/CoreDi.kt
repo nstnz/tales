@@ -8,6 +8,7 @@ import com.nst.tales.common.domain.flow.UserModelFlow
 import com.nst.tales.common.domain.usecase.AnonymousAuthUseCase
 import com.nst.tales.common.domain.usecase.CreateBookUseCase
 import com.nst.tales.common.domain.usecase.IsSignedInUseCase
+import com.nst.tales.common.domain.usecase.UpdateUserUseCase
 import com.nst.tales.common.firebase.FirebaseImpl
 import org.kodein.di.DI
 import org.kodein.di.bind
@@ -42,5 +43,8 @@ internal val coreDi = DI.Module(name = "Core") {
     }
     bind<CreateBookUseCase>() with provider {
         CreateBookUseCase(instance(), instance())
+    }
+    bind<UpdateUserUseCase>() with provider {
+        UpdateUserUseCase(instance(), instance())
     }
 }

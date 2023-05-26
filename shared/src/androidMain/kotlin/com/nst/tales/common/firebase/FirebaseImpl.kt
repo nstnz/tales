@@ -55,7 +55,11 @@ actual class FirebaseImpl {
 
     actual suspend fun createOrUpdate(path: String, id: String, model: Any) {
         auth.currentUser?.uid?.let {
-            database.child(it).child(path).updateChildren(mapOf(id to model))
+            if (path.isNotEmpty()) {
+                database.child(it).child(path).updateChildren(mapOf(id to model))
+            } else {
+                database.child(it).updateChildren(mapOf(id to model))
+            }
         }
     }
 
