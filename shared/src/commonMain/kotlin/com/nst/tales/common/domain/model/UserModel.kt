@@ -1,7 +1,7 @@
 package com.nst.tales.common.domain.model
 
-data class BookModel(
+data class UserModel(
     val id: String,
     val name: String,
-    val chapters: List<ChapterModel>,
+    val books: List<BookModel>
 )

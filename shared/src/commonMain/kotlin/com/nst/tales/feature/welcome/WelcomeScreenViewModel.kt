@@ -1,7 +1,6 @@
 package com.nst.tales.feature.welcome
 
 import com.nst.tales.common.domain.usecase.AnonymousAuthUseCase
-import com.nst.tales.common.domain.usecase.GetUserUseCase
 import com.nst.tales.common.ui.base.CoroutinesViewModel
 import com.nst.tales.common.ui.router.Router
 

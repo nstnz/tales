@@ -40,7 +40,7 @@ internal fun MainScreen(
                     color = AppTheme.colors.textLightSecondary(),
                 )
                 Text(
-                    text = state.userName + "!",
+                    text = state.user?.name + "!",
                     style = AppTheme.typography.large3,
                     color = AppTheme.colors.textLightDefault(),
                 )
@@ -61,7 +61,7 @@ internal fun MainScreen(
                     NewBookComponent(Modifier.width(296.dp).height(424.dp))
                     SpacerComponent { x2 }
                 }
-                items(3) {
+                items(state.books.size) {
                     CardComponent(Modifier.width(296.dp).height(424.dp)) {}
                     SpacerComponent { x2 }
                 }

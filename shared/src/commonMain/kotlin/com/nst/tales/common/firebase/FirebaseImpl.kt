@@ -14,5 +14,5 @@ expect class FirebaseImpl() {
 
     suspend fun delete(path: String, id: String)
 
-    fun setUpdateCallback(callback: (Any) -> Unit)
+    fun setUpdateCallback(callback: (Map<String,*>) -> Unit)
 }

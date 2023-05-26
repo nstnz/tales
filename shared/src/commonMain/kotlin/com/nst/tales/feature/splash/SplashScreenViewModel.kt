@@ -1,13 +1,12 @@
 package com.nst.tales.feature.splash
 
-import com.nst.tales.common.domain.usecase.AnonymousAuthUseCase
-import com.nst.tales.common.domain.usecase.GetUserUseCase
+import com.nst.tales.common.domain.usecase.IsSignedInUseCase
 import com.nst.tales.common.ui.base.CoroutinesViewModel
 import com.nst.tales.common.ui.router.Router
 
 internal class SplashScreenViewModel(
     private val router: Router,
-    private val getUserUseCase: GetUserUseCase,
+    private val isSignedInUseCase: IsSignedInUseCase,
 ) : CoroutinesViewModel<SplashScreenState, SplashScreenIntent, SplashScreenSingleEvent>() {
 
     override fun initialState(): SplashScreenState = SplashScreenState
@@ -23,7 +22,7 @@ internal class SplashScreenViewModel(
         state: SplashScreenState
     ): SplashScreenIntent? = when (intent) {
         SplashScreenIntent.Load -> {
-            if (getUserUseCase() == null) {
+            if (!isSignedInUseCase()) {
                 //first launch
                 router.navigateToWelcomeScreen()
             } else {

@@ -14,18 +14,20 @@ actual class FirebaseImpl {
 
     private val auth = Firebase.auth
     private val database = Firebase.database.reference
-    private var callback: ((Any) -> Unit)? = null
+    private var callback: ((Map<String, *>) -> Unit)? = null
 
     init {
         FirebaseApp.initializeApp(Android.context)
     }
 
-    actual fun setUpdateCallback(callback: (Any) -> Unit) {
+    actual fun setUpdateCallback(callback: (Map<String, *>) -> Unit) {
         this.callback = callback
     }
 
     actual suspend fun isSignedIn(): Boolean {
-        auth.currentUser?.uid?.let { addUpdatesListener(it) }
+        auth.currentUser?.uid?.let {
+            addUpdatesListener(it)
+        }
         return auth.currentUser != null
     }
 
@@ -36,7 +38,10 @@ actual class FirebaseImpl {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser
-                    user?.uid?.let { addUpdatesListener(it) }
+                    user?.uid?.let {
+                        database.child(it).child("id").setValue(it)
+                        addUpdatesListener(it)
+                    }
                     callback(user != null)
                 } else {
                     callback(false)
@@ -63,7 +68,12 @@ actual class FirebaseImpl {
     private fun addUpdatesListener(key: String) {
         database.child(key).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                callback?.invoke(snapshot.getValue<String>().orEmpty())
+                snapshot.getValue<HashMap<String, *>>()?.let {
+                    callback?.invoke(
+                        it.toMutableMap().apply {
+                            this["id"] = auth.currentUser?.uid.orEmpty()
+                        })
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {

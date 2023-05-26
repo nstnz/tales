@@ -1,12 +1,12 @@
 package com.nst.tales.feature.main
 
-import com.nst.tales.common.domain.usecase.GetUserUseCase
+import com.nst.tales.common.domain.flow.UserModelFlow
 import com.nst.tales.common.ui.base.CoroutinesViewModel
 import com.nst.tales.common.ui.router.Router
 
 internal class MainScreenViewModel(
     private val router: Router,
-    private val getUserUseCase: GetUserUseCase,
+    private val userModelFlow: UserModelFlow,
 ) : CoroutinesViewModel<MainScreenState, MainScreenIntent, MainScreenSingleEvent>() {
 
     init {
@@ -19,7 +19,7 @@ internal class MainScreenViewModel(
         intent: MainScreenIntent,
         prevState: MainScreenState
     ): MainScreenState = when (intent) {
-        is MainScreenIntent.Update -> prevState.copy(userName = intent.userName)
+        is MainScreenIntent.Update -> prevState.copy(user = intent.user)
         else -> prevState
     }
 
@@ -28,9 +28,12 @@ internal class MainScreenViewModel(
         state: MainScreenState
     ): MainScreenIntent? = when (intent) {
         MainScreenIntent.Load -> {
-            val user = getUserUseCase()
-            MainScreenIntent.Update(user.orEmpty())
+            userModelFlow.flow.collect {
+                sendIntent(MainScreenIntent.Update(it))
+            }
+            null
         }
+
         is MainScreenIntent.Update -> null
     }
 }
