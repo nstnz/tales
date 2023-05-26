@@ -36,7 +36,11 @@ kotlin {
                 implementation(compose.materialIconsExtended)
                 implementation(compose.material)
                 implementation(compose.runtime)
-                implementation("com.yat3s.openai:openai-android:0.0.4")
+                implementation(Kodein.kodein_core)
+                api(Moe.precompose)
+                api(Moe.precompose_viewmodel)
+                implementation(Firebase.firestore)
+                implementation(Firebase.database)
             }
         }
         val androidMain by getting {
@@ -51,6 +55,10 @@ kotlin {
                 implementation(compose.material)
                 implementation(compose.runtime)
                 implementation(compose.uiTooling)
+                implementation(Kodein.kodein_android)
+                implementation(Lottie.lottie)
+                implementation(Lottie.lottie_compose)
+                implementation("com.google.firebase:firebase-auth-ktx:22.0.0")
             }
         }
         val iosX64Main by getting

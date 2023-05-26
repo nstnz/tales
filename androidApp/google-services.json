@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "169730726426",
+    "project_id": "onboarding-42866",
+    "storage_bucket": "onboarding-42866.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169730726426:android:c00b08c957bef95c3acfa3",
+        "android_client_info": {
+          "package_name": "com.nst.tales.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169730726426-ac3lq15auohg6buemh6p6cmelhhls2sk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDdQmfG1jkfUUG7UzwiUG5wY8u3Ox7xWA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169730726426-ac3lq15auohg6buemh6p6cmelhhls2sk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

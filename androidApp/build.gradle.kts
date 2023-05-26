@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     kotlin("android")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -52,4 +53,5 @@ dependencies {
     implementation(Compose.activity_compose)
     implementation(Compose.material)
     implementation(Prefs.prefs)
+    implementation(Moe.precompose)
 }

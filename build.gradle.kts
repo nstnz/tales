@@ -5,6 +5,7 @@ plugins {
     kotlin("android").version(Version.kotlin).apply(false)
     kotlin("multiplatform").version(Version.kotlin).apply(false)
     id("org.jetbrains.compose").version(Version.compose).apply(false)
+    id("com.google.gms.google-services").version(Version.play_services).apply(false)
 }
 
 tasks.register("clean", Delete::class) {

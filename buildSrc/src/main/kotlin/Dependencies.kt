@@ -1,4 +1,3 @@
-
 object Version {
     const val kotlin = "1.7.20"
     const val gradle = "7.3.1"
@@ -6,7 +5,7 @@ object Version {
     const val material = "1.4.0"
     const val compose = "1.2.1"
     const val compose_compiler = "1.3.2"
-    const val precompose = "1.3.9"
+    const val precompose = "1.4.0"
     const val ktor = "2.1.2"
     const val kodein = "7.16.0"
     const val mokoMvvm = "0.13.0"
@@ -14,8 +13,10 @@ object Version {
     const val prefs = "0.0.1"
     const val openai = "3.2.4"
     const val activity_compose = "1.7.1"
+    const val lottie = "6.0.0"
+    const val firebase = "1.8.0"
+    const val play_services = "4.3.15"
 }
-
 
 object AndroidSdk {
     const val min = 24
@@ -48,7 +49,10 @@ object Kotlin {
     const val serialization = "org.jetbrains.kotlin:kotlin-serialization:${Version.kotlin}"
 }
 
-const val precompose = "moe.tlaster:precompose:${Version.precompose}"
+object Moe {
+    const val precompose = "moe.tlaster:precompose:${Version.precompose}"
+    const val precompose_viewmodel = "moe.tlaster:precompose-viewmodel:${Version.precompose}"
+}
 
 object Ktor {
     const val client_core = "io.ktor:ktor-client-core:${Version.ktor}"
@@ -84,4 +88,15 @@ object Moko {
 
 object OpenAI {
     const val openai = "com.aallam.openai:openai-client:${Version.openai}"
+}
+
+object Lottie {
+    const val lottie = "com.airbnb.android:lottie:${Version.lottie}"
+    const val lottie_compose = "com.airbnb.android:lottie-compose:${Version.lottie}"
+}
+
+object Firebase {
+    const val auth = "dev.gitlive:firebase-auth::${Version.firebase}"
+    const val database = "dev.gitlive:firebase-database:${Version.firebase}"
+    const val firestore = "dev.gitlive:firebase-firestore:${Version.firebase}"
 }
