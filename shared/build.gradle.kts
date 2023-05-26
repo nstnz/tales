@@ -59,6 +59,7 @@ kotlin {
                 implementation(Lottie.lottie)
                 implementation(Lottie.lottie_compose)
                 implementation(Firebase.auth_android)
+                implementation(Firebase.db_android)
             }
         }
         val iosX64Main by getting

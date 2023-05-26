@@ -55,4 +55,5 @@ dependencies {
     implementation(Prefs.prefs)
     implementation(Moe.precompose)
     implementation(Firebase.auth_android)
+    implementation(Firebase.db_android)
 }

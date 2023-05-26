@@ -1,9 +1,8 @@
 package com.nst.tales.common.di
 
-import com.nst.tales.common.auth.FirebaseImpl
 import com.nst.tales.common.domain.usecase.AnonymousAuthUseCase
 import com.nst.tales.common.domain.usecase.GetUserUseCase
-import io.ktor.util.reflect.instanceOf
+import com.nst.tales.common.firebase.FirebaseImpl
 import org.kodein.di.DI
 import org.kodein.di.bind
 import org.kodein.di.instance

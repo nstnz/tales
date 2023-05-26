@@ -1,6 +1,6 @@
 package com.nst.tales.common.domain.usecase
 
-import com.nst.tales.common.auth.FirebaseImpl
+import com.nst.tales.common.firebase.FirebaseImpl
 
 internal class AnonymousAuthUseCase(
     private val firebase: FirebaseImpl
