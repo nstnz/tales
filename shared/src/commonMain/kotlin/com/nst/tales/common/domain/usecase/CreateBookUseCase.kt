@@ -3,6 +3,7 @@ package com.nst.tales.common.domain.usecase
 import com.nst.tales.common.data.BookRepository
 import com.nst.tales.common.domain.model.BookModel
 import com.nst.tales.common.domain.model.ChapterModel
+import com.nst.tales.randomUUID
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import kotlin.random.Random
@@ -17,7 +18,7 @@ internal class CreateBookUseCase(
     suspend operator fun invoke() = withContext(dispatcher) {
         repository.saveBook(
             BookModel(
-                id = random.nextLong().toString(),
+                id = randomUUID(),
                 name = "Book number ${random.nextInt()}",
                 image = "https://blog-cdn.reedsy.com/uploads/2019/12/boy-at-the-back.jpg",
                 chapters = listOf(

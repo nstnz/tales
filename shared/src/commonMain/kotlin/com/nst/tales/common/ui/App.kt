@@ -4,8 +4,7 @@ import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveableStateHolder
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.nst.tales.common.di.SharedDI
 import com.nst.tales.common.ui.router.Arg1
@@ -13,14 +12,15 @@ import com.nst.tales.common.ui.router.Arg2
 import com.nst.tales.common.ui.router.Arg3
 import com.nst.tales.common.ui.router.Router
 import com.nst.tales.common.ui.router.Routes
+import com.nst.tales.feature.creating.CreatingScreenHolder
 import com.nst.tales.feature.main.MainScreenHolder
 import com.nst.tales.feature.splash.SplashScreenHolder
+import com.nst.tales.feature.survey.SurveyScreenHolder
 import com.nst.tales.feature.welcome.WelcomeScreenHolder
 import moe.tlaster.precompose.navigation.BackStackEntry
 import moe.tlaster.precompose.navigation.NavHost
 import moe.tlaster.precompose.navigation.rememberNavigator
 import moe.tlaster.precompose.navigation.transition.NavTransition
-import moe.tlaster.precompose.stateholder.LocalStateHolder
 import org.kodein.di.instance
 
 @Composable
@@ -50,6 +50,8 @@ internal fun App() {
                         Routes.Splash -> SplashScreenHolder()
                         Routes.Main -> MainScreenHolder()
                         Routes.Welcome -> WelcomeScreenHolder()
+                        Routes.Creating -> CreatingScreenHolder()
+                        Routes.Survey -> SurveyScreenHolder()
                     }
                 }
 

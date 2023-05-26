@@ -10,8 +10,8 @@ import androidx.compose.material.icons.rounded.NavigateNext
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
-import com.nst.tales.design.theme.*
 import com.nst.tales.design.theme.AppTheme
+import com.nst.tales.design.theme.accent1
 import com.nst.tales.design.theme.noEffectsClickable
 
 @Composable
@@ -30,7 +30,6 @@ internal fun TextSelectorComponent(
             enabled = false,
             value = TextFieldValue(text),
             placeholder = "",
-            hint = hint,
             label = label,
             onValueChange = {},
             trailingIcon = {

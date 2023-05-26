@@ -7,6 +7,8 @@ import com.nst.tales.common.domain.model.UserModel
 internal fun mockUser() = UserModel(
     id = "",
     name = "Nastya",
+    age = 10,
+    isGirl = true,
     books = listOf(
         mockBook(),
         mockBook(),

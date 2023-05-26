@@ -21,4 +21,12 @@ internal class Router() {
     fun navigateToMainScreen() {
         navigator.navigate(Routes.Main)
     }
+
+    fun navigateToCreating() {
+        navigator.navigate(Routes.Creating)
+    }
+
+    fun navigateToSurvey() {
+        navigator.navigate(Routes.Survey)
+    }
 }

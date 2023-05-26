@@ -166,7 +166,7 @@ internal fun TextFieldImpl(
 			leadingColor = leadingIconColor,
 			trailingColor = trailingIconColor,
 			labelProgress = labelProgress,
-			indicatorWidth = AppTheme.indents.x0_25,
+			indicatorWidth = AppTheme.indents.x0_5,
 			indicatorColor = colors.indicatorColor(enabled, isError, interactionSource).value,
 			shape = shape,
 			backgroundColor = colors.backgroundColor(enabled).value,

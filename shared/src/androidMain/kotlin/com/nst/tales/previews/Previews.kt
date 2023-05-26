@@ -6,18 +6,29 @@ import com.nst.tales.design.theme.AppTheme
 import com.nst.tales.feature.main.MainScreen
 import com.nst.tales.feature.main.MainScreenState
 import com.nst.tales.feature.splash.SplashScreen
+import com.nst.tales.feature.survey.SurveyScreen
+import com.nst.tales.feature.survey.SurveyScreenState
 
 @Preview
 @Composable
-private fun SplashPreview() {
+private fun SplashScreenPreview() {
     AppTheme {
         SplashScreen()
     }
 }
+
 @Preview
 @Composable
-private fun MainPreview() {
+private fun MainScreenPreview() {
     AppTheme {
         MainScreen(MainScreenState(mockUser()), {})
+    }
+}
+
+@Preview
+@Composable
+private fun SurveyScreenPreview() {
+    AppTheme {
+        SurveyScreen(SurveyScreenState)
     }
 }

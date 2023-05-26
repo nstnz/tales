@@ -25,7 +25,6 @@ import com.nst.tales.design.input.internal.OutlinedTextField
 import com.nst.tales.design.input.internal.TextInputState
 import com.nst.tales.design.spacer.SpacerComponent
 import com.nst.tales.design.theme.*
-import com.nst.tales.design.theme.AppTheme
 
 @Suppress("LongMethod")
 @Composable
@@ -34,7 +33,6 @@ internal fun TextInputComponent(
     value: TextFieldValue,
     onValueChange: (TextFieldValue) -> Unit,
     placeholder: String,
-    hint: String = "",
     label: String = "",
     singleLine: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
@@ -69,7 +67,7 @@ internal fun TextInputComponent(
                         interactionSource = interactionSource
                     ).value
             )
-            SpacerComponent { x0_5 }
+            SpacerComponent { x1 }
         }
         OutlinedTextField(
             interactionSource = interactionSource,
@@ -82,7 +80,7 @@ internal fun TextInputComponent(
             placeholder = {
                 Text(
                     text = placeholder,
-                    style = AppTheme.typography.body2,
+                    style = AppTheme.typography.body1,
                 )
             },
             isError = textFieldState is TextInputState.Error,
@@ -92,17 +90,17 @@ internal fun TextInputComponent(
                     minWidth = minWidth,
                 )
                 .background(
-                    shape = AppTheme.shapes.x2,
+                    shape = AppTheme.shapes.x2_5,
                     color = background,
                 ),
-            textStyle = AppTheme.typography.body2,
+            textStyle = AppTheme.typography.body1,
             singleLine = singleLine,
             maxLines = maxLines,
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,
             visualTransformation = visualTransformation,
             colors = getTextColors(),
-            shape = AppTheme.shapes.x2,
+            shape = AppTheme.shapes.x2_5,
             trailingIcon = trailingIcon ?: getTrailingIcon(
                 hasClearButton,
                 value,
@@ -113,10 +111,6 @@ internal fun TextInputComponent(
         ErrorContent(
             hasError = hasError,
             error = error
-        )
-        HintContent(
-            hasError = hasError,
-            hint = hint,
         )
     }
 }
@@ -148,33 +142,17 @@ private fun getTrailingIcon(
 private fun getTextColors() =
     TextFieldDefaults.outlinedTextFieldColors(
         textColor = AppTheme.colors.textDarkDefault(),
-        focusedBorderColor = AppTheme.colors.accent3(),
-        unfocusedBorderColor = AppTheme.colors.accent1(),
+        focusedBorderColor = AppTheme.colors.accent4(),
+        unfocusedBorderColor = AppTheme.colors.accent4(),
         focusedLabelColor = AppTheme.colors.textDarkDefault(),
         unfocusedLabelColor = AppTheme.colors.textDarkDefault(),
         placeholderColor = AppTheme.colors.textDarkDisabled(),
-        cursorColor = AppTheme.colors.accent1(),
-        disabledTextColor = AppTheme.colors.textDarkDisabled(),
-        disabledBorderColor = AppTheme.colors.textDarkDisabled(),
-        disabledLabelColor = AppTheme.colors.textDarkDisabled(),
+        cursorColor = AppTheme.colors.accent4(),
+        disabledTextColor = AppTheme.colors.textDarkDefault(),
+        disabledBorderColor = AppTheme.colors.accent4(),
+        disabledLabelColor = AppTheme.colors.textDarkDefault(),
+        backgroundColor = AppTheme.colors.textLightDefault()
     )
-
-@Composable
-private fun HintContent(
-    hasError: Boolean,
-    hint: String,
-) {
-    if (hint.isNotEmpty()) {
-        AnimatedVisibility(visible = !hasError) {
-            Text(
-                text = hint,
-                style = AppTheme.typography.body2,
-                color = AppTheme.colors.textDarkDisabled(),
-                modifier = Modifier.padding(top = AppTheme.indents.x0_5),
-            )
-        }
-    }
-}
 
 @Composable
 private fun ErrorContent(

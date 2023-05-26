@@ -9,6 +9,8 @@ internal class UserMapper {
     fun map(map: Map<String, *>): UserModel = UserModel(
         id = map["id"].toString(),
         name = map["name"]?.toString().orEmpty(),
+        age = map["age"] as? Int,
+        isGirl = map["isGirl"] as? Boolean,
         books = when (val result = map["books"]) {
             is HashMap<*, *> -> getBooksFromMap(result)
             is List<*> -> getBooksFromList(result)

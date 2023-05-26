@@ -1,19 +1,20 @@
 package com.nst.tales.design.topbar
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowBackIosNew
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.Dp
-import com.nst.tales.design.spacer.SpacerComponent
-import com.nst.tales.design.theme.*
+import com.nst.tales.design.image.ImageType
+import com.nst.tales.design.image.SimpleIcon
 import com.nst.tales.design.theme.AppTheme
+import com.nst.tales.design.theme.noEffectsClickable
+import com.nst.tales.design.theme.textLightDefault
 
 @Composable
 internal fun DefaultNavComponent(
@@ -22,18 +23,16 @@ internal fun DefaultNavComponent(
     showBackButton: Boolean = true,
 ) {
     NavBarComponent(
-        modifier = Modifier.background(AppTheme.colors.background1()),
+        modifier = Modifier.height(AppTheme.indents.x8),
         title = title,
         navigationIcon = {
             if (showBackButton) {
-                IconButton(onClick = onBackClick) {
-                    Icon(
-                        Icons.Rounded.ArrowBackIosNew,
-                        null,
-                        modifier = Modifier.size(AppTheme.indents.x3_5),
-                        tint = AppTheme.colors.textLightDefault()
-                    )
-                }
+                SimpleIcon(
+                    tint = AppTheme.colors.textLightDefault(),
+                    type = ImageType.IcClose,
+                    modifier = Modifier.size(AppTheme.indents.x6)
+                        .noEffectsClickable { onBackClick() },
+                )
             }
         }
     )
@@ -45,8 +44,6 @@ internal fun NavBarComponent(
     modifier: Modifier = Modifier,
     titleColor: Color = AppTheme.colors.textLightDefault(),
     navigationIcon: @Composable (() -> Unit)? = null,
-    actions: @Composable RowScope.() -> Unit = {},
-    titleIcon: @Composable (() -> Unit)? = null,
 ) {
     NavBarComponent(
         title = {
@@ -60,8 +57,6 @@ internal fun NavBarComponent(
         },
         modifier = modifier,
         navigationIcon = navigationIcon,
-        actions = actions,
-        titleIcon = titleIcon
     )
 }
 
@@ -70,31 +65,16 @@ private fun NavBarComponent(
     title: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     navigationIcon: @Composable (() -> Unit)? = null,
-    actions: @Composable RowScope.() -> Unit = {},
-    backgroundColor: Color = AppTheme.colors.transparent(),
-    contentColor: Color = contentColorFor(backgroundColor),
-    elevation: Dp = AppTheme.elevations.flat,
-    titleIcon: @Composable (() -> Unit)? = null,
 ) {
-    Box(modifier = modifier, contentAlignment = Alignment.Center) {
-        TopAppBar(
-            title = {},
-            modifier = Modifier
-                .align(Alignment.TopCenter),
-            navigationIcon = navigationIcon,
-            actions = actions,
-            backgroundColor = backgroundColor,
-            contentColor = contentColor,
-            elevation = elevation,
-        )
+    Row(
+        modifier = modifier.padding(horizontal = AppTheme.indents.x2),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        navigationIcon?.invoke()
         Row(
-            modifier,
+            Modifier.weight(1f),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            titleIcon?.let {
-                it.invoke()
-                SpacerComponent { x1 }
-            }
             title()
         }
     }

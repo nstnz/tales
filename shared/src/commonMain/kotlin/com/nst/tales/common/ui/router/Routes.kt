@@ -7,5 +7,7 @@ internal const val Arg3 = "Arg3"
 internal enum class Routes(val floating: Boolean = false) {
     Splash,
     Main,
-    Welcome
+    Welcome,
+    Creating,
+    Survey,
 }

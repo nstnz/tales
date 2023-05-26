@@ -9,6 +9,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import com.airbnb.lottie.compose.LottieAnimation
@@ -18,12 +19,27 @@ import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.nst.tales.design.image.AnimationIterations
 import com.nst.tales.design.image.AnimationType
+import com.nst.tales.design.image.ImageType
+import java.util.UUID
 
 actual fun ByteArray.toImageBitmap(): ImageBitmap {
     return BitmapFactory.decodeByteArray(this, 0, this.size).asImageBitmap()
 }
 
 actual fun getFont(): FontFamily = FontFamily(Font(R.font.architun))
+
+actual fun randomUUID() = UUID.randomUUID().toString()
+
+@Composable
+actual fun getPainter(
+    type: ImageType
+) = painterResource(
+    id = when (type) {
+        ImageType.IcClose -> R.drawable.ic_close
+        ImageType.IcBoy -> R.drawable.ic_boy
+        ImageType.IcGirl -> R.drawable.ic_girl
+    }
+)
 
 @Composable
 actual fun AnimatedComponent(
