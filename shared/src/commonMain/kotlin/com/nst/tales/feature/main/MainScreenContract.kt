@@ -16,6 +16,7 @@ internal data class MainScreenState(
 
 internal sealed interface MainScreenIntent : Intent {
     object Load : MainScreenIntent
+    object CreateBook : MainScreenIntent
     data class Update(val user: UserModel?) : MainScreenIntent
 }
 

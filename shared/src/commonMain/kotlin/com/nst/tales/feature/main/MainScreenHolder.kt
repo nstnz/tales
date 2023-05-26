@@ -20,6 +20,7 @@ internal fun MainScreenHolder() {
     }
 
     MainScreen(
-        state = viewState
+        state = viewState,
+        onCreateBook = { viewModel.sendIntent(MainScreenIntent.CreateBook) }
     )
 }

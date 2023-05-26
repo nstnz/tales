@@ -20,6 +20,7 @@ import com.nst.tales.design.theme.textDarkSecondary
 @Composable
 internal fun NewBookComponent(
     modifier: Modifier,
+    onCreateBook: () -> Unit
 ) {
     CardComponent(modifier) {
         Box(Modifier.fillMaxWidth().weight(1f)) {
@@ -46,7 +47,7 @@ internal fun NewBookComponent(
                 text = "Join the world of literature and books and journeys and other!"
             )
             SpacerComponent { x3 }
-            PrimaryButtonComponent("Create", {})
+            PrimaryButtonComponent("Create", onCreateBook)
         }
     }
 }

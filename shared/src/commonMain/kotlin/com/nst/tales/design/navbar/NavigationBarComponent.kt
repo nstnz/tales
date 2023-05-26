@@ -68,7 +68,7 @@ private fun BottomNavigationItem(
             modifier = Modifier,
             cornersRadius = AppTheme.indents.x3,
             addDarkness = true,
-            color = if (item.selected) AppTheme.colors.accent2() else AppTheme.colors.accent3()
+            color = if (item is MainNavigationItem) AppTheme.colors.accent2() else AppTheme.colors.accent3(),
         ) {
             Box(
                 Modifier
@@ -92,8 +92,7 @@ private fun BottomNavigationItem(
         Text(
             modifier = Modifier.align(Alignment.CenterHorizontally),
             text = item.text,
-            color = if (item.selected)
-                AppTheme.colors.accent2() else AppTheme.colors.accent3(),
+            color = if (item is MainNavigationItem) AppTheme.colors.accent2() else AppTheme.colors.accent3(),
             style = AppTheme.typography.body2
         )
     }

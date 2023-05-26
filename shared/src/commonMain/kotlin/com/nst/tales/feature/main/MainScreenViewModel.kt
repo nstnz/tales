@@ -1,12 +1,14 @@
 package com.nst.tales.feature.main
 
 import com.nst.tales.common.domain.flow.UserModelFlow
+import com.nst.tales.common.domain.usecase.CreateBookUseCase
 import com.nst.tales.common.ui.base.CoroutinesViewModel
 import com.nst.tales.common.ui.router.Router
 
 internal class MainScreenViewModel(
     private val router: Router,
     private val userModelFlow: UserModelFlow,
+    private val createBookUseCase: CreateBookUseCase
 ) : CoroutinesViewModel<MainScreenState, MainScreenIntent, MainScreenSingleEvent>() {
 
     init {
@@ -35,5 +37,9 @@ internal class MainScreenViewModel(
         }
 
         is MainScreenIntent.Update -> null
+        MainScreenIntent.CreateBook -> {
+            createBookUseCase()
+            null
+        }
     }
 }

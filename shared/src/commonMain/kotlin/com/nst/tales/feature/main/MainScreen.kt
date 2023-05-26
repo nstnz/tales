@@ -14,6 +14,8 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.nst.tales.design.card.BookComponent
@@ -29,7 +31,8 @@ import com.nst.tales.design.theme.textLightSecondary
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun MainScreen(
-    state: MainScreenState
+    state: MainScreenState,
+    onCreateBook: () -> Unit
 ) {
     GradientScaffold {
         Column(Modifier.fillMaxSize().padding(AppTheme.indents.x3)) {
@@ -58,7 +61,7 @@ internal fun MainScreen(
                 flingBehavior = rememberSnapFlingBehavior(lazyListState = listState),
             ) {
                 items(1) {
-                    NewBookComponent(Modifier.width(296.dp).height(424.dp))
+                    NewBookComponent(Modifier.width(296.dp).height(424.dp), onCreateBook)
                     SpacerComponent { x2 }
                 }
                 items(state.books.size) {
@@ -69,9 +72,25 @@ internal fun MainScreen(
 
             Spacer(Modifier.weight(1f))
 
+            val mainTabSelected = remember { mutableStateOf(true) }
+            val booksTabSelected = remember { mutableStateOf(false) }
+            val setTabSelected = remember { mutableStateOf(false) }
+
             NavigationBarComponent(
-                true, false, false,
-                {}, {}, {}
+                mainTabSelected.value, booksTabSelected.value, setTabSelected.value,
+                {
+                    mainTabSelected.value = true
+                    booksTabSelected.value = false
+                    setTabSelected.value = false
+                }, {
+                    mainTabSelected.value = false
+                    booksTabSelected.value = true
+                    setTabSelected.value = false
+                }, {
+                    mainTabSelected.value = false
+                    booksTabSelected.value = false
+                    setTabSelected.value = true
+                }
             )
         }
     }

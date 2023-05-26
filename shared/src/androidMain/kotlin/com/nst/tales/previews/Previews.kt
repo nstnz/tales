@@ -18,6 +18,6 @@ private fun SplashPreview() {
 @Composable
 private fun MainPreview() {
     AppTheme {
-        MainScreen(MainScreenState(mockUser()))
+        MainScreen(MainScreenState(mockUser()), {})
     }
 }

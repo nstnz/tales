@@ -23,7 +23,7 @@ internal val viewModelsDi = DI.Module(name = "ViewModels") {
     }
     bind<MainScreenViewModel>() with scoped(mainScope).multiton {
         MainScreenViewModel(
-            instance(), instance(),
+            instance(), instance(), instance(),
         )
     }
     bind<WelcomeScreenViewModel>() with scoped(welcomeScope).multiton {
