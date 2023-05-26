@@ -21,5 +21,8 @@ internal fun SurveyScreenHolder() {
 
     SurveyScreen(
         state = viewState,
+        onChangeAge = { viewModel.sendIntent(SurveyScreenIntent.UpdateAge(it)) },
+        onChangeGender = { viewModel.sendIntent(SurveyScreenIntent.UpdateGender(it)) },
+        onChangeName = { viewModel.sendIntent(SurveyScreenIntent.UpdateName(it)) },
     )
 }

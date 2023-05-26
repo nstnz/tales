@@ -29,6 +29,7 @@ import com.nst.tales.design.theme.AppTheme
 import com.nst.tales.design.theme.InOuterShadow
 import com.nst.tales.design.theme.accent2
 import com.nst.tales.design.theme.accent3
+import com.nst.tales.design.theme.noEffectsClickable
 import com.nst.tales.design.theme.textDarkDefault
 import com.nst.tales.design.theme.textDarkSecondary
 import com.nst.tales.design.theme.textLightDefault
@@ -36,7 +37,10 @@ import com.nst.tales.design.topbar.DefaultNavComponent
 
 @Composable
 internal fun SurveyScreen(
-    state: SurveyScreenState
+    state: SurveyScreenState,
+    onChangeGender: (Boolean) -> Unit = {},
+    onChangeName: (String) -> Unit = {},
+    onChangeAge: (String) -> Unit = {},
 ) {
     GradientScaffold(
         topBar = {
@@ -73,16 +77,14 @@ internal fun SurveyScreen(
                     SpacerComponent { x3 }
                     TextInputComponent(
                         Modifier.fillMaxWidth(),
-                        enabled = false,
                         value = TextFieldValue(state.userModel?.name.orEmpty()),
                         placeholder = "Name",
                         label = "sdfdsfsdf",
-                        onValueChange = {}
+                        onValueChange = { onChangeName(it.text) }
                     )
                     SpacerComponent { x3 }
                     TextInputComponent(
                         Modifier.fillMaxWidth(),
-                        enabled = false,
                         value = TextFieldValue(state.userModel?.age?.toString().orEmpty()),
                         placeholder = "Age",
                         label = "sdfdsfsdf",
@@ -97,9 +99,17 @@ internal fun SurveyScreen(
                     )
                     SpacerComponent { x1 }
                     Row {
-                        GenderIcon(isGirl = true, selected = state.userModel?.isGirl == true)
+                        GenderIcon(
+                            isGirl = true,
+                            selected = state.userModel?.isGirl == true,
+                            onClick = { onChangeGender(true) }
+                        )
                         SpacerComponent { x6 }
-                        GenderIcon(isGirl = false, selected = state.userModel?.isGirl == false)
+                        GenderIcon(
+                            isGirl = false,
+                            selected = state.userModel?.isGirl == false,
+                            onClick = { onChangeGender(false) }
+                        )
                     }
                     SpacerComponent { x1 }
                     SpacerComponent { x3 }
@@ -116,6 +126,7 @@ internal fun SurveyScreen(
 private fun GenderIcon(
     isGirl: Boolean,
     selected: Boolean,
+    onClick: () -> Unit
 ) {
     InOuterShadow(
         modifier = Modifier.alpha(if (selected) 1f else 0.5f),
@@ -125,6 +136,7 @@ private fun GenderIcon(
     ) {
         Box(
             Modifier
+                .noEffectsClickable { onClick() }
                 .size(AppTheme.indents.x8_5)
                 .background(
                     AppTheme.colors.accent3(),
