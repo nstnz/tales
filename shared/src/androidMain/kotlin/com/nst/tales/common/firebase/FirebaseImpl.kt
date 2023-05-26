@@ -6,6 +6,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.nst.tales.Android
 
@@ -13,9 +14,14 @@ actual class FirebaseImpl {
 
     private val auth = Firebase.auth
     private val database = Firebase.database.reference
+    private var callback: ((Any) -> Unit)? = null
 
     init {
         FirebaseApp.initializeApp(Android.context)
+    }
+
+    actual fun setUpdateCallback(callback: (Any) -> Unit) {
+        this.callback = callback
     }
 
     actual suspend fun isSignedIn(): Boolean {
@@ -57,7 +63,7 @@ actual class FirebaseImpl {
     private fun addUpdatesListener(key: String) {
         database.child(key).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-
+                callback?.invoke(snapshot.getValue<String>().orEmpty())
             }
 
             override fun onCancelled(error: DatabaseError) {

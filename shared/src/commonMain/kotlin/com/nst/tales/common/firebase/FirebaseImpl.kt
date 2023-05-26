@@ -13,4 +13,6 @@ expect class FirebaseImpl() {
     suspend fun createOrUpdate(path: String, id: String, model: Any)
 
     suspend fun delete(path: String, id: String)
+
+    fun setUpdateCallback(callback: (Any) -> Unit)
 }
