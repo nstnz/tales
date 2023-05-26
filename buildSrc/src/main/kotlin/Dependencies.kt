@@ -15,6 +15,7 @@ object Version {
     const val activity_compose = "1.7.1"
     const val lottie = "6.0.0"
     const val firebase = "1.8.0"
+    const val firebase_android = "22.0.0"
     const val play_services = "4.3.15"
 }
 
@@ -99,4 +100,5 @@ object Firebase {
     const val auth = "dev.gitlive:firebase-auth::${Version.firebase}"
     const val database = "dev.gitlive:firebase-database:${Version.firebase}"
     const val firestore = "dev.gitlive:firebase-firestore:${Version.firebase}"
+    const val auth_android = "com.google.firebase:firebase-auth-ktx:${Version.firebase_android}"
 }

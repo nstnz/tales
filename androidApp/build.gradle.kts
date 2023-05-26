@@ -54,4 +54,5 @@ dependencies {
     implementation(Compose.material)
     implementation(Prefs.prefs)
     implementation(Moe.precompose)
+    implementation(Firebase.auth_android)
 }
