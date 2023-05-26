@@ -17,4 +17,5 @@ expect fun AnimatedComponent(
     modifier: Modifier = Modifier,
     iterations: AnimationIterations = AnimationIterations.FixedCount(times = 1),
     speed: Float = 1F,
+    isPlaying: Boolean = true
 )

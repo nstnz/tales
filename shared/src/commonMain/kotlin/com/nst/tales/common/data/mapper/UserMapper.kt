@@ -15,7 +15,8 @@ internal class UserMapper {
                 val chapters = values["chapters"] as? List<HashMap<*, *>>
                 BookModel(
                     id = it.key.toString(),
-                    name = values["name"].toString(),
+                    name = values["name"]?.toString().orEmpty(),
+                    image = values["image"]?.toString().orEmpty(),
                     chapters = chapters?.filterNotNull()?.map {
                         ChapterModel(
                             name = it["name"].toString(),

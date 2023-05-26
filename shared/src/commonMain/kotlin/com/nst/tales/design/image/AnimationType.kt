@@ -1,5 +1,8 @@
 package com.nst.tales.design.image
 
 enum class AnimationType {
-    CreateBook
+    CreateBook,
+    MainMenuIcon,
+    SettingsIcon,
+    BooksIcon
 }

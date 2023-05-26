@@ -16,7 +16,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.nst.tales.design.card.CardComponent
+import com.nst.tales.design.card.BookComponent
 import com.nst.tales.design.card.NewBookComponent
 import com.nst.tales.design.navbar.NavigationBarComponent
 import com.nst.tales.design.scaffold.GradientScaffold
@@ -62,7 +62,7 @@ internal fun MainScreen(
                     SpacerComponent { x2 }
                 }
                 items(state.books.size) {
-                    CardComponent(Modifier.width(296.dp).height(424.dp)) {}
+                    BookComponent(Modifier.width(296.dp).height(424.dp), state.books[it])
                     SpacerComponent { x2 }
                 }
             }

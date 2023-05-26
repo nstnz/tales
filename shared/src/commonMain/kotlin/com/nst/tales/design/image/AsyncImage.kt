@@ -1,14 +1,20 @@
 package com.nst.tales.design.image
 
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.layout.ContentScale
 import com.nst.tales.toImageBitmap
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.request.*
-import io.ktor.utils.io.core.*
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.request.get
+import io.ktor.utils.io.core.use
 
 @Composable
 internal fun AsyncImage(
@@ -25,7 +31,8 @@ internal fun AsyncImage(
         androidx.compose.foundation.Image(
             modifier = modifier,
             bitmap = it,
-            contentDescription = contentDescription
+            contentDescription = contentDescription,
+            contentScale = ContentScale.Crop
         )
     } ?: run {
         Spacer(modifier = modifier)

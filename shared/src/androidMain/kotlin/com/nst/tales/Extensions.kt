@@ -2,7 +2,6 @@ package com.nst.tales
 
 import android.graphics.BitmapFactory
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,9 +31,13 @@ actual fun AnimatedComponent(
     modifier: Modifier,
     iterations: AnimationIterations,
     speed: Float,
+    isPlaying: Boolean
 ) {
     val animationRes = when (type) {
         AnimationType.CreateBook -> R.raw.create_book
+        AnimationType.MainMenuIcon -> R.raw.main_menu_icon
+        AnimationType.SettingsIcon -> R.raw.settings_icon
+        AnimationType.BooksIcon -> R.raw.books_icon
     }
 
     var replayOnChangeTrigger by remember(animationRes) { mutableStateOf(false) }
@@ -45,15 +48,10 @@ actual fun AnimatedComponent(
         is AnimationIterations.FixedCount -> iterations.times
     }
 
-    LaunchedEffect(animationRes) {
-        // Trigger replay animation when resource changes (magic)
-        replayOnChangeTrigger = true
-    }
-
     val animationState = animateLottieCompositionAsState(
         composition = composition,
         iterations = lottieIterations,
-        isPlaying = replayOnChangeTrigger,
+        isPlaying = isPlaying,
         speed = speed,
     )
 

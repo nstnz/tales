@@ -18,6 +18,7 @@ internal fun mockUser() = UserModel(
 internal fun mockBook() = BookModel(
     id = "1",
     name = "Booky book",
+    image = "",
     chapters = listOf(
         ChapterModel(
             name = "1",
