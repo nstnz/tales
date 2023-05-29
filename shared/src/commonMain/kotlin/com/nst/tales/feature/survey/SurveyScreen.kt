@@ -20,7 +20,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import com.nst.tales.design.button.PrimaryButtonComponent
 import com.nst.tales.design.card.CardComponent
-import com.nst.tales.design.image.ImageType
+import com.nst.tales.design.image.IconType
 import com.nst.tales.design.image.SimpleIcon
 import com.nst.tales.design.input.TextInputComponent
 import com.nst.tales.design.scaffold.GradientScaffold
@@ -145,7 +145,7 @@ private fun GenderIcon(
                 .padding(AppTheme.indents.x1)
         ) {
             SimpleIcon(
-                type = if (isGirl) ImageType.IcGirl else ImageType.IcBoy,
+                type = if (isGirl) IconType.IcGirl else IconType.IcBoy,
                 modifier = Modifier.align(Alignment.Center)
                     .fillMaxSize(),
                 tint = AppTheme.colors.textLightDefault()

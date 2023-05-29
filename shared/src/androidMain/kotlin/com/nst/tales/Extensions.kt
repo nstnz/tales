@@ -19,6 +19,7 @@ import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.nst.tales.design.image.AnimationIterations
 import com.nst.tales.design.image.AnimationType
+import com.nst.tales.design.image.IconType
 import com.nst.tales.design.image.ImageType
 import java.util.UUID
 
@@ -32,12 +33,21 @@ actual fun randomUUID() = UUID.randomUUID().toString()
 
 @Composable
 actual fun getPainter(
+    type: IconType
+) = painterResource(
+    id = when (type) {
+        IconType.IcClose -> R.drawable.ic_close
+        IconType.IcBoy -> R.drawable.ic_boy
+        IconType.IcGirl -> R.drawable.ic_girl
+    }
+)
+
+@Composable
+actual fun getPainter(
     type: ImageType
 ) = painterResource(
     id = when (type) {
-        ImageType.IcClose -> R.drawable.ic_close
-        ImageType.IcBoy -> R.drawable.ic_boy
-        ImageType.IcGirl -> R.drawable.ic_girl
+        ImageType.BgReflection -> R.drawable.bg_reflection
     }
 )
 

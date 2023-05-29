@@ -20,7 +20,13 @@ internal object Gradients {
 
     @Composable
     fun pageStart() = Brush.horizontalGradient(
-        0.3f to Color(0xfff9f9f9),
-        1f to AppTheme.colors.textLightDefault(),
+        0.0f to Color(0x55b5b5b5),
+        1f to AppTheme.colors.transparent(),
+    )
+
+    @Composable
+    fun coverStart() = Brush.horizontalGradient(
+        0.0f to Color(0xffffffff),
+        1f to AppTheme.colors.transparent(),
     )
 }

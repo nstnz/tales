@@ -7,6 +7,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.font.FontFamily
 import com.nst.tales.design.image.AnimationIterations
 import com.nst.tales.design.image.AnimationType
+import com.nst.tales.design.image.IconType
 import com.nst.tales.design.image.ImageType
 
 expect fun ByteArray.toImageBitmap(): ImageBitmap
@@ -23,5 +24,7 @@ expect fun AnimatedComponent(
 )
 
 expect fun randomUUID(): String
+
+expect fun getPainter(type: IconType): Painter
 
 expect fun getPainter(type: ImageType): Painter

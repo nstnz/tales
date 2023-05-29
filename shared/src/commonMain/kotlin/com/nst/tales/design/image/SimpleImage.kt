@@ -1,21 +1,31 @@
 package com.nst.tales.design.image
 
-import androidx.compose.material.Icon
+import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.layout.ContentScale
+import com.nst.tales.design.theme.AppTheme
+import com.nst.tales.design.theme.transparent
 import com.nst.tales.getPainter
 
 @Composable
-internal fun SimpleIcon(
+internal fun SimpleImage(
     type: ImageType,
-    tint: Color,
     modifier: Modifier = Modifier,
+    colorMultiply: Color? = null
 ) {
-    Icon(
-        modifier = modifier,
+    Image(
+        painter = getPainter(type),
         contentDescription = "",
-        tint = tint,
-        painter = getPainter(type)
+        modifier = modifier,
+        contentScale = ContentScale.FillBounds,
+        colorFilter = colorMultiply?.let {
+            ColorFilter.lighting(
+                multiply = it,
+                add = AppTheme.colors.transparent()
+            )
+        }
     )
 }

@@ -10,7 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import com.nst.tales.design.image.ImageType
+import com.nst.tales.design.image.IconType
 import com.nst.tales.design.image.SimpleIcon
 import com.nst.tales.design.theme.AppTheme
 import com.nst.tales.design.theme.noEffectsClickable
@@ -29,7 +29,7 @@ internal fun DefaultNavComponent(
             if (showBackButton) {
                 SimpleIcon(
                     tint = AppTheme.colors.textLightDefault(),
-                    type = ImageType.IcClose,
+                    type = IconType.IcClose,
                     modifier = Modifier.size(AppTheme.indents.x6)
                         .noEffectsClickable { onBackClick() },
                 )
