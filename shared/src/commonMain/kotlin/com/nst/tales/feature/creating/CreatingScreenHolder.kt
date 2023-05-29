@@ -19,7 +19,5 @@ internal fun CreatingScreenHolder() {
         }
     }
 
-    CreatingScreen(
-        state = viewState,
-    )
+    CreatingScreen()
 }
