@@ -18,9 +18,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import com.nst.tales.common.domain.model.BookModel
-import com.nst.tales.common.domain.model.ChapterModel
+import com.nst.tales.common.domain.model.ChapterPartModel
 import com.nst.tales.design.scaffold.GradientScaffold
 import com.nst.tales.design.theme.AppTheme
+import com.nst.tales.design.topbar.DefaultNavComponent
 import com.nst.tales.feature.book.inner.PageComponent
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -28,7 +29,7 @@ import com.nst.tales.feature.book.inner.PageComponent
 internal fun BookScreen(
     bookModel: BookModel,
 ) {
-    GradientScaffold {
+    GradientScaffold() {
         BoxWithConstraints(Modifier.fillMaxSize()) {
             val height = this.maxHeight
 
@@ -38,18 +39,21 @@ internal fun BookScreen(
                 modifier = Modifier
                     .fillMaxWidth(),
                 contentPadding = PaddingValues(AppTheme.indents.x0),
-                flingBehavior = rememberSnapFlingBehavior(lazyListState = listState),
+               flingBehavior = rememberSnapFlingBehavior(lazyListState = listState),
             ) {
                 item {
                     FirstCover(height)
                 }
-                items(bookModel.chapters) {
-                    Page(height, it)
+                bookModel.chapters.map { it.splitIntoParts() }.forEach { parts ->
+                    items(parts) {
+                        Page(height, it)
+                    }
                 }
                 item {
                     LastCover(height)
                 }
             }
+            DefaultNavComponent()
         }
     }
 }
@@ -71,7 +75,7 @@ private fun LastCover(
 @Composable
 private fun Page(
     height: Dp,
-    chapterModel: ChapterModel
+    chapterModel: ChapterPartModel
 ) {
     PageComponent(
         Modifier

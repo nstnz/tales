@@ -7,7 +7,9 @@ enum class PageTemplate(val index: Int) {
     TopImageSmall(3),
     BottomImageSmall(4),
     SplitImageFull(5),
-    InnerText(6);
+    InnerText(6),
+    OnlyText(7),
+    ;
 
     companion object {
         fun getByIndex(index: Int) = values().firstOrNull { it.index == index } ?: TopImageFull
