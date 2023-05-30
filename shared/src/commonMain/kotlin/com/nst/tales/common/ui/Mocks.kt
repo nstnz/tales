@@ -1,4 +1,4 @@
-package com.nst.tales.previews
+package com.nst.tales.common.ui
 
 import com.nst.tales.common.domain.model.BookModel
 import com.nst.tales.common.domain.model.ChapterModel
@@ -22,14 +22,21 @@ internal fun mockBook() = BookModel(
     name = "Booky book",
     image = "",
     chapters = listOf(
-        ChapterModel(
-            name = "1",
-            text = "sfdskjflksdjflk jsdlkfjl sdf",
-            images = emptyList()
-        ),ChapterModel(
-            name = "2",
-            text = "zdkljflsk djflks jdlfjlksd jflk",
-            images = emptyList()
-        ),
+        mockChapter(0),
+        mockChapter(1),
+        mockChapter(2),
+        mockChapter(3),
+        mockChapter(4),
+        mockChapter(5),
+        mockChapter(6),
+    )
+)
+
+internal fun mockChapter(index: Int) = ChapterModel(
+    name = index.toString(),
+    text = "zdkljflsk djflks jdlfjlksd jflk",
+    template = index,
+    images = listOf(
+        "https://thumbs.dreamstime.com/b/group-kids-outdoors-looking-down-camera-square-format-128588960.jpg"
     )
 )

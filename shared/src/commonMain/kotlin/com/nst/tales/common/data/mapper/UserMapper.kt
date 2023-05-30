@@ -51,6 +51,7 @@ internal class UserMapper {
             ChapterModel(
                 name = it["name"].toString(),
                 text = it["text"].toString(),
+                template = it["template"].toString().toIntOrNull() ?: 0,
                 images = emptyList()
             )
         }
@@ -60,6 +61,7 @@ internal class UserMapper {
             ChapterModel(
                 name = chapters["name"].toString(),
                 text = chapters["text"].toString(),
+                template = chapters["template"].toString().toIntOrNull() ?: 0,
                 images = emptyList()
             )
         )

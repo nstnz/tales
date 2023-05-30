@@ -19,7 +19,6 @@ import io.ktor.utils.io.core.use
 @Composable
 internal fun AsyncImage(
     url: String,
-    contentDescription: String? = "",
     modifier: Modifier = Modifier
 ) {
     if (!url.startsWith("http")) {
@@ -31,7 +30,7 @@ internal fun AsyncImage(
         androidx.compose.foundation.Image(
             modifier = modifier,
             bitmap = it,
-            contentDescription = contentDescription,
+            contentDescription = "",
             contentScale = ContentScale.Crop
         )
     } ?: run {

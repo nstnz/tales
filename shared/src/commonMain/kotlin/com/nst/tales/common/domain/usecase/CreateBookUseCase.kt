@@ -3,6 +3,7 @@ package com.nst.tales.common.domain.usecase
 import com.nst.tales.common.data.BookRepository
 import com.nst.tales.common.domain.model.BookModel
 import com.nst.tales.common.domain.model.ChapterModel
+import com.nst.tales.common.domain.model.PageTemplate
 import com.nst.tales.randomUUID
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -25,6 +26,7 @@ internal class CreateBookUseCase(
                     ChapterModel(
                         name = "Chapter number ${random.nextInt()}",
                         text = "Chapter number ${random.nextInt()}",
+                        template = PageTemplate.values().random().index,
                         images = emptyList()
                     )
                 )

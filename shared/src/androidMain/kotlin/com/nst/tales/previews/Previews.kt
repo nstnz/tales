@@ -2,6 +2,8 @@ package com.nst.tales.previews
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.nst.tales.common.ui.mockBook
+import com.nst.tales.common.ui.mockUser
 import com.nst.tales.design.theme.AppTheme
 import com.nst.tales.feature.book.BookScreen
 import com.nst.tales.feature.creating.CreatingScreen
