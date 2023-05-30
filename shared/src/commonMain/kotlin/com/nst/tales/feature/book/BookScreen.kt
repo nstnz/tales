@@ -34,6 +34,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.nst.tales.common.domain.model.BookModel
+import com.nst.tales.common.domain.model.ChapterModel
 import com.nst.tales.design.image.ImageType
 import com.nst.tales.design.image.SimpleImage
 import com.nst.tales.design.scaffold.GradientScaffold
@@ -43,18 +45,43 @@ import com.nst.tales.design.theme.noEffectsClickable
 import com.nst.tales.design.theme.textLightDefault
 import com.nst.tales.design.theme.transparent
 
-private const val count = 6
-
 @Composable
 internal fun BookScreen(
+    bookModel: BookModel,
     coverColor: Color = AppTheme.colors.accent5()
 ) {
+    val count = 2 + bookModel.chapters.size
+
     val leftPageVisible = remember { mutableStateOf(false) }
+    val currentPage = remember { mutableStateOf(0) }
+    val rotatedList = mutableListOf<MutableState<Boolean>>()
+    repeat(count) {
+        rotatedList.add(mutableStateOf(false))
+    }
+
+    val goNext = {
+        leftPageVisible.value = true
+        if (currentPage.value < count - 1) {
+            rotatedList[currentPage.value].value = true
+            currentPage.value++
+        }
+    }
+
+    val goPrev = {
+        if (currentPage.value >= 0) {
+            rotatedList[currentPage.value].value = false
+            if (currentPage.value > 0) {
+                currentPage.value--
+            } else {
+                leftPageVisible.value = false
+            }
+        }
+    }
 
     GradientScaffold {
         BoxWithConstraints(Modifier.fillMaxSize()) {
             val h = this.maxHeight
-            val neededH = (this.maxWidth - AppTheme.indents.x2 * 2) * 1.65f
+            val neededH = (this.maxWidth - AppTheme.indents.x2 * 2) * 1.75f
             val padding = (h - neededH) / 2
 
             Surface(
@@ -72,19 +99,46 @@ internal fun BookScreen(
                     .padding(horizontal = AppTheme.indents.x2)
                     .fillMaxSize()
             ) {
-                FlipCard(this.maxWidth, padding, count, 6, {
-                    Cover(coverColor, {})
-                }, cover = true)
+                FlipCard(
+                    width = this.maxWidth,
+                    rotated = rotatedList[count - 1],
+                    padding = padding,
+                    count = count,
+                    page = count - 1,
+                    cover = true,
+                    onClick = goNext,
+                    content = {
+                        Cover(coverColor, {})
+                    },
+                )
 
-                FlipCard(this.maxWidth, padding, count, 5, { Page({}) })
-                FlipCard(this.maxWidth, padding, count, 4, { Page({}) })
-                FlipCard(this.maxWidth, padding, count, 3, { Page({}) })
-                FlipCard(this.maxWidth, padding, count, 2, { Page({}) })
-                FlipCard(this.maxWidth, padding, count, 1, { Page({}) })
+                bookModel.chapters.reversed().forEachIndexed { index, chapterModel ->
+                    FlipCard(
+                        width = this.maxWidth,
+                        rotated = rotatedList[count - index - 2],
+                        padding = padding,
+                        count = count,
+                        page = count - index - 2,
+                        cover = false,
+                        onClick = goNext,
+                        content = {
+                            Page(chapterModel)
+                        },
+                    )
+                }
 
-                FlipCard(this.maxWidth, padding, count, 0, {
-                    Cover(coverColor, {})
-                }, cover = true, leftPageVisible)
+                FlipCard(
+                    width = this.maxWidth,
+                    rotated = rotatedList[0],
+                    padding = padding,
+                    count = count,
+                    page = 0,
+                    cover = true,
+                    onClick = goNext,
+                    content = {
+                        Cover(coverColor, {})
+                    },
+                )
             }
 
             AnimatedVisibility(
@@ -94,6 +148,7 @@ internal fun BookScreen(
             ) {
                 Box(
                     Modifier.fillMaxHeight().width(AppTheme.indents.x3)
+                        .noEffectsClickable { goPrev() }
                         .padding(vertical = padding - AppTheme.indents.x2)
                         .background(
                             AppTheme.gradients.pageEnd(),
@@ -111,15 +166,14 @@ internal fun BookScreen(
 @Composable
 fun FlipCard(
     width: Dp,
+    rotated: MutableState<Boolean>,
     padding: Dp,
     count: Int,
     page: Int,
     content: @Composable () -> Unit,
     cover: Boolean = false,
-    leftPageVisible: MutableState<Boolean>? = null,
+    onClick: () -> Unit
 ) {
-    val rotated = remember { mutableStateOf(false) }
-
     val rotation by animateFloatAsState(
         targetValue = if (rotated.value) 270f else 360f,
         animationSpec = tween(500)
@@ -143,15 +197,12 @@ fun FlipCard(
                         cameraDistance = 32 * density
                     }
                     .noEffectsClickable {
-                        if (page != count) {
-                            rotated.value = true
-                            leftPageVisible?.value = true
-                        }
+                        onClick()
                     },
             )
             {
                 val paddingH = if (cover) 0.dp else 8.dp
-                val paddingW = if (cover) 0.dp else (count - page).dp * 2.5f + paddingH
+                val paddingW = if (cover) 0.dp else (count - page).dp * 2f + paddingH
                 Surface(
                     Modifier
                         .padding(vertical = padding + paddingH)
@@ -179,7 +230,7 @@ fun FlipCard(
 
 @Composable
 private fun Page(
-    pageContent: @Composable () -> Unit
+    chapterModel: ChapterModel
 ) {
     Box(Modifier.fillMaxSize().background(AppTheme.colors.textLightDefault())) {
         Box(
@@ -188,9 +239,8 @@ private fun Page(
                 .align(Alignment.CenterStart)
         )
         Box(Modifier.fillMaxSize().padding(start = AppTheme.indents.x1)) {
-            pageContent()
             Text(
-                text = "Page",
+                text = chapterModel.name,
                 style = AppTheme.typography.large1,
                 modifier = Modifier,
                 color = AppTheme.colors.accent5()

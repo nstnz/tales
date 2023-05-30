@@ -47,6 +47,6 @@ private fun CreatingScreenPreview() {
 @Composable
 private fun BookScreenPreview() {
     AppTheme {
-        BookScreen()
+        BookScreen(mockBook())
     }
 }
