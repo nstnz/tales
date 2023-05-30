@@ -61,3 +61,17 @@ internal fun Colors.textLightSecondary(): Color = Color(0xCCFFFFFF)
 @Composable
 @ReadOnlyComposable
 internal fun Colors.textLightDisabled(): Color = Color(0x99FFFFFF)
+
+internal fun getColorsForBook(): List<Long> = listOf(
+    0xffAED6B8,
+    0xffEDFFF1,
+    0xffFFF0BB,
+    0xffFFE3A6,
+    0xffDEDCFF,
+    0xffA8A3EC,
+    0xffFAEBFF,
+    0xffFFBAB4,
+    0xffE7F8FF,
+    0xFFFFF5D1,
+    0xFFE7F2FF
+)

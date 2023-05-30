@@ -3,6 +3,7 @@ package com.nst.tales.common.ui
 import com.nst.tales.common.domain.model.BookModel
 import com.nst.tales.common.domain.model.ChapterModel
 import com.nst.tales.common.domain.model.UserModel
+import com.nst.tales.design.theme.getColorsForBook
 
 internal fun mockUser() = UserModel(
     id = "",
@@ -36,6 +37,7 @@ internal fun mockChapter(index: Int) = ChapterModel(
     name = index.toString(),
     text = "zdkljflsk djflks jdlfjlksd jflk",
     template = index,
+    color = getColorsForBook().random(),
     images = listOf(
         "https://thumbs.dreamstime.com/b/group-kids-outdoors-looking-down-camera-square-format-128588960.jpg"
     )

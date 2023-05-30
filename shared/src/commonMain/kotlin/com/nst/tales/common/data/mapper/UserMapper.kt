@@ -39,7 +39,7 @@ internal class UserMapper {
             name = values["name"]?.toString().orEmpty(),
             image = values["image"]?.toString().orEmpty(),
             chapters = when (val result = chapters) {
-                is HashMap<*, *> -> getChapters(result)
+                is HashMap<*, *> -> listOf(getChapters(result))
                 is List<*> -> getChapters(result)
                 else -> emptyList()
             }
@@ -48,21 +48,15 @@ internal class UserMapper {
 
     private fun getChapters(chapters: List<*>): List<ChapterModel> =
         chapters.filterNotNull().filterIsInstance<HashMap<*, *>>().map {
-            ChapterModel(
-                name = it["name"].toString(),
-                text = it["text"].toString(),
-                template = it["template"].toString().toIntOrNull() ?: 0,
-                images = emptyList()
-            )
+            getChapters(it)
         }
 
-    private fun getChapters(chapters: HashMap<*, *>): List<ChapterModel> =
-        listOf(
-            ChapterModel(
-                name = chapters["name"].toString(),
-                text = chapters["text"].toString(),
-                template = chapters["template"].toString().toIntOrNull() ?: 0,
-                images = emptyList()
-            )
+    private fun getChapters(chapters: HashMap<*, *>): ChapterModel =
+        ChapterModel(
+            name = chapters["name"].toString(),
+            text = chapters["text"].toString(),
+            template = chapters["template"].toString().toIntOrNull() ?: 0,
+            color = chapters["color"].toString().toLongOrNull() ?: 0,
+            images = emptyList()
         )
 }

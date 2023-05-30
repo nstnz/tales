@@ -1,10 +1,12 @@
 package com.nst.tales.feature.book.inner
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Text
@@ -19,6 +21,7 @@ import com.nst.tales.common.domain.model.PageTemplate
 import com.nst.tales.design.image.AsyncImage
 import com.nst.tales.design.spacer.SpacerComponent
 import com.nst.tales.design.theme.AppTheme
+import com.nst.tales.design.theme.textDarkDefault
 import com.nst.tales.design.theme.textLightDefault
 
 @Composable
@@ -29,11 +32,53 @@ internal fun PageComponent(
     when (PageTemplate.getByIndex(chapterModel.template)) {
         PageTemplate.TopImageFull -> TopImageFull(chapterModel, modifier)
         PageTemplate.BottomImageFull -> BottomImageFull(chapterModel, modifier)
-        PageTemplate.ImageFull -> SplitImageFull(chapterModel, modifier)
+        PageTemplate.ImageFull -> ImageFull(chapterModel, modifier)
         PageTemplate.TopImageSmall -> TopImageSmall(chapterModel, modifier)
         PageTemplate.BottomImageSmall -> BottomImageSmall(chapterModel, modifier)
         PageTemplate.SplitImageFull -> SplitImageFull(chapterModel, modifier)
-        PageTemplate.InnerText -> SplitImageFull(chapterModel, modifier)
+        PageTemplate.InnerText -> InnerText(chapterModel, modifier)
+    }
+}
+
+@Composable
+private fun ImageFull(
+    chapterModel: ChapterModel,
+    modifier: Modifier,
+) {
+    BoxWithConstraints(modifier) {
+        AsyncImage(
+            chapterModel.images.firstOrNull().orEmpty(),
+            modifier
+        )
+        Box(
+            Modifier.fillMaxWidth()
+                .padding(bottom = AppTheme.indents.x3)
+                .align(Alignment.BottomCenter),
+            contentAlignment = Alignment.Center
+        ) {
+            ChapterComponent(chapterModel, AppTheme.colors.textLightDefault())
+        }
+    }
+}
+
+@Composable
+private fun InnerText(
+    chapterModel: ChapterModel,
+    modifier: Modifier,
+) {
+    Box(modifier) {
+        AsyncImage(
+            chapterModel.images.firstOrNull().orEmpty(),
+            modifier
+        )
+        Box(
+            Modifier.padding(AppTheme.indents.x4).fillMaxWidth().align(Alignment.Center)
+                .background(Color(chapterModel.color), AppTheme.shapes.x3)
+                .heightIn(min = 400.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            ChapterComponent(chapterModel, AppTheme.colors.textDarkDefault())
+        }
     }
 }
 
@@ -55,13 +100,13 @@ private fun SplitImageFull(
             Modifier.weight(1f),
             contentAlignment = Alignment.Center
         ) {
-            ChapterComponent(chapterModel, AppTheme.colors.textLightDefault())
+            ChapterComponent(chapterModel, AppTheme.colors.textDarkDefault())
         }
         SpacerComponent { x4 }
         BoxWithConstraints(Modifier.fillMaxWidth()) {
             val height = this.maxWidth / 2
             AsyncImage(
-                chapterModel.images.firstOrNull().orEmpty(),
+                chapterModel.images.getOrNull(1).orEmpty(),
                 Modifier.fillMaxWidth().height(height)
             )
         }
@@ -81,7 +126,7 @@ private fun TopImageSmall(
             Modifier.weight(1f),
             contentAlignment = Alignment.Center
         ) {
-            ChapterComponent(chapterModel, AppTheme.colors.textLightDefault())
+            ChapterComponent(chapterModel, AppTheme.colors.textDarkDefault())
         }
         SpacerComponent { x4 }
     }
@@ -98,11 +143,11 @@ private fun BottomImageSmall(
             Modifier.weight(1f),
             contentAlignment = Alignment.Center
         ) {
-            ChapterComponent(chapterModel, AppTheme.colors.textLightDefault())
+            ChapterComponent(chapterModel, AppTheme.colors.textDarkDefault())
         }
         SpacerComponent { x4 }
         AsyncImage(chapterModel.images.firstOrNull().orEmpty(), Modifier.size(256.dp))
-        SpacerComponent { x4 }
+        SpacerComponent { x6 }
     }
 }
 
@@ -118,7 +163,7 @@ private fun TopImageFull(
             Modifier.weight(1f),
             contentAlignment = Alignment.Center
         ) {
-            ChapterComponent(chapterModel, AppTheme.colors.textLightDefault())
+            ChapterComponent(chapterModel, AppTheme.colors.textDarkDefault())
         }
         SpacerComponent { x4 }
     }
@@ -135,7 +180,7 @@ private fun BottomImageFull(
             Modifier.weight(1f),
             contentAlignment = Alignment.Center
         ) {
-            ChapterComponent(chapterModel, AppTheme.colors.textLightDefault())
+            ChapterComponent(chapterModel, AppTheme.colors.textDarkDefault())
         }
         SpacerComponent { x4 }
         AsyncImage(chapterModel.images.firstOrNull().orEmpty(), Modifier.fillMaxWidth())

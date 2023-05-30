@@ -21,7 +21,6 @@ import com.nst.tales.common.domain.model.BookModel
 import com.nst.tales.common.domain.model.ChapterModel
 import com.nst.tales.design.scaffold.GradientScaffold
 import com.nst.tales.design.theme.AppTheme
-import com.nst.tales.design.theme.accent3
 import com.nst.tales.feature.book.inner.PageComponent
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -78,7 +77,7 @@ private fun Page(
         Modifier
             .fillMaxWidth()
             .heightIn(min = height)
-            .background(AppTheme.colors.accent3()),
+            .background(Color(chapterModel.color)),
         chapterModel
     )
 }
